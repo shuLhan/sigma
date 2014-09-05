@@ -128,3 +128,29 @@ insert into bank values
 ,(2, "BNI")
 ,(3, "Mandiri")
 ,(4, "BRI");
+
+insert into _menu
+(_profile_id ,id ,pid ,type ,label ,icon ,image ,module ,description)
+values
+ (1	,900	,0		,0		,"Referensi"			,"reference"	,""						,"References"					,"")
+,(1	,901	,900	,3		,"Perguruan Tinggi"		,"reference"	,"icons/reference.svg"	,"References_College"			,"")
+,(1	,902	,900	,3		,"Fakultas"				,"reference"	,"icons/reference.svg"	,"References_CollegeFaculty"	,"")
+,(1	,903	,900	,3		,"Jurusan"				,"reference"	,"icons/reference.svg"	,"References_CollegeMajor"		,"")
+,(1	,904	,900	,3		,"Jenjang Pendidikan"	,"reference"	,"icons/reference.svg"	,"References_CollegeDegree"		,"")
+,(1	,905	,900	,3		,"Sumber Informasi"		,"reference"	,"icons/reference.svg"	,"References_SourceInfo"		,"")
+,(1	,906	,900	,3		,"Jenis Pembayaran"		,"reference"	,"icons/reference.svg"	,"References_PaymentType"		,"")
+,(1	,907	,900	,3		,"Kelompok Pembayaran"	,"reference"	,"icons/reference.svg"	,"References_PaymentLot"		,"")
+,(1	,908	,900	,3		,"Bank"					,"reference"	,"icons/reference.svg"	,"References_Bank"				,"");
+
+insert into _group_menu
+(_group_id	,_menu_id	,permission)
+values
+ (1			,900		,4)
+,(1			,901		,4)
+,(1			,902		,4)
+,(1			,903		,4)
+,(1			,904		,4)
+,(1			,905		,4)
+,(1			,906		,4)
+,(1			,907		,4)
+,(1			,908		,4);
