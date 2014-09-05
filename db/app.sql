@@ -134,12 +134,12 @@ insert into _menu
 values
  (1	,900	,0		,0		,"Referensi"			,"reference"	,""						,"References"					,"")
 ,(1	,901	,900	,3		,"Perguruan Tinggi"		,"reference"	,"icons/reference.svg"	,"References_College"			,"")
-,(1	,902	,900	,3		,"Fakultas"				,"reference"	,"icons/reference.svg"	,"References_CollegeFaculty"	,"")
-,(1	,903	,900	,3		,"Jurusan"				,"reference"	,"icons/reference.svg"	,"References_CollegeMajor"		,"")
-,(1	,904	,900	,3		,"Jenjang Pendidikan"	,"reference"	,"icons/reference.svg"	,"References_CollegeDegree"		,"")
+,(1	,902	,900	,3		,"Fakultas"				,"reference"	,"icons/reference.svg"	,"References_College_Faculty"	,"")
+,(1	,903	,900	,3		,"Jurusan"				,"reference"	,"icons/reference.svg"	,"References_College_Major"		,"")
+,(1	,904	,900	,3		,"Jenjang Pendidikan"	,"reference"	,"icons/reference.svg"	,"References_College_Degree"	,"")
 ,(1	,905	,900	,3		,"Sumber Informasi"		,"reference"	,"icons/reference.svg"	,"References_SourceInfo"		,"")
-,(1	,906	,900	,3		,"Jenis Pembayaran"		,"reference"	,"icons/reference.svg"	,"References_PaymentType"		,"")
-,(1	,907	,900	,3		,"Kelompok Pembayaran"	,"reference"	,"icons/reference.svg"	,"References_PaymentLot"		,"")
+,(1	,906	,900	,3		,"Jenis Pembayaran"		,"reference"	,"icons/reference.svg"	,"References_Payment_Type"		,"")
+,(1	,907	,900	,3		,"Kelompok Pembayaran"	,"reference"	,"icons/reference.svg"	,"References_Payment_Lot"		,"")
 ,(1	,908	,900	,3		,"Bank"					,"reference"	,"icons/reference.svg"	,"References_Bank"				,"");
 
 insert into _group_menu
