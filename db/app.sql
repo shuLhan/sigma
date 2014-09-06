@@ -66,12 +66,6 @@ create table customer (
 ,	cost_add_value2		numeric(10,2)	default 0.0
 ,	cost_add_value3		numeric(10,2)	default 0.0
 ,	cost_total			numeric(10,2)	default 0.0
-
-,	payment_1			numeric(10,2)	default 0.0
-,	payment_2			numeric(10,2)	default 0.0
-,	payment_3			numeric(10,2)	default 0.0
-,	payment_4			numeric(10,2)	default 0.0
-,	payment_total		numeric(10,2)	default 0.0
 );
 
 create table customer_payment (
@@ -80,14 +74,15 @@ create table customer_payment (
 ,	ts					timestamp		not null
 
 ,	customer_id			bigint			not null
+,	pay_date			date			not null
 ,	payment_lot_id		bigint			not null
 ,	payment_type_id		bigint			not null
 
-,	transfer_bank_id	bigint			null
-,	transfer_account	varchar(256)	null
+,	bank_source_id		bigint			null
+,	bank_dest_id		bigint			null
 
-,	debit_bank_id		bigint			null
-,	debit_card			varchar(256)	null
+,	receipt_code		varchar(128)	null
+,	total				numeric(10,2)	default 0.0
 );
 
 insert into college values 
@@ -141,7 +136,9 @@ insert into _menu
 (_profile_id ,id ,pid ,type ,label ,icon ,image ,module ,description)
 values
  (1	,100	,0		,0		,"Kostumer"				,"group"		,""						,"Customer"				,"")
-,(1	,101	,100	,3		,"Profil"				,"profile"		,"icons/profile.svg"	,"Customer_Profile"		,"")
+,(1	,101	,100	,3		,"Data"					,"profile"		,"icons/profile.svg"	,"Customer"				,"")
+,(1	,102	,100	,0		,"Profil"				,""				,""						,"Customer_Profile"		,"")
+,(1	,103	,100	,0		,"Payment"				,""				,""						,"Customer_Payment"		,"")
 ,(1	,900	,0		,0		,"Referensi"			,"reference"	,""						,"References"					,"")
 ,(1	,901	,900	,3		,"Perguruan Tinggi"		,"reference"	,"icons/reference.svg"	,"References_College"			,"")
 ,(1	,902	,900	,3		,"Fakultas"				,"reference"	,"icons/reference.svg"	,"References_College_Faculty"	,"")
@@ -157,6 +154,8 @@ insert into _group_menu
 values
  (1			,100		,4)
 ,(1			,101		,4)
+,(1			,102		,4)
+,(1			,103		,4)
 ,(1			,900		,4)
 ,(1			,901		,4)
 ,(1			,902		,4)
