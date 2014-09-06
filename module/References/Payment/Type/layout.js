@@ -10,15 +10,7 @@ Ext.define ("Jx.app.References.Payment.Type", {
 	{
 		itemId		:"References_Payment_Type"
 	,	title		:"Tipe Pembayaran"
-	,	store		: Ext.create ("Jx.StoreRest",
-		{
-			url		:Jx.generateModDir ("References_Payment_Type")
-		,	fields	:
-			[
-				"id"
-			,	"name"
-			]
-		})
+	,	store		:Jx.app.store.References.Payment.Type
 	,	columns		:
 		[{
 			header		:"ID"

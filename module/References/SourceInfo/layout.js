@@ -10,15 +10,7 @@ Ext.define ("Jx.app.References.SourceInfo", {
 	{
 		itemId		:"References_SourceInfo"
 	,	title		:"Sumber Informasi"
-	,	store		: Ext.create ("Jx.StoreRest",
-		{
-			url		:Jx.generateModDir ("References_SourceInfo")
-		,	fields	:
-			[
-				"id"
-			,	"name"
-			]
-		})
+	,	store		:Jx.app.store.References.SourceInfo
 	,	columns		:
 		[{
 			header		:"ID"

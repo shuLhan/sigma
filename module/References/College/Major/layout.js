@@ -10,15 +10,7 @@ Ext.define ("Jx.app.References.College.Major", {
 	{
 		itemId		:"References_College_Major"
 	,	title		:"Jurusan"
-	,	store		: Ext.create ("Jx.StoreRest",
-		{
-			url		:Jx.generateModDir ("References_College_Major")
-		,	fields	:
-			[
-				"id"
-			,	"name"
-			]
-		})
+	,	store		:Jx.app.store.References.College.Major
 	,	columns		:
 		[{
 			header		:"ID"
