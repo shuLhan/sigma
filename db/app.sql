@@ -54,17 +54,24 @@ create table customer (
 ,	source_info_id		bigint			null
 ,	source_info_others	varchar(512)	null
 
-,	respondent_number	int				default 0
-,	item_number			int				default 0
+,	n_respondent		int				default 0
+,	n_item				int				default 0
 ,	using_analysis_data	int				default 0
 ,	using_consultation	int				default 0
-,	cost_others			numeric(10,2)	default 0.0
+
+,	cost_add_1			varchar(128)	null
+,	cost_add_2			varchar(128)	null
+,	cost_add_3			varchar(128)	null
+,	cost_add_value1		numeric(10,2)	default 0.0
+,	cost_add_value2		numeric(10,2)	default 0.0
+,	cost_add_value3		numeric(10,2)	default 0.0
 ,	cost_total			numeric(10,2)	default 0.0
 
 ,	payment_1			numeric(10,2)	default 0.0
 ,	payment_2			numeric(10,2)	default 0.0
 ,	payment_3			numeric(10,2)	default 0.0
-,	payment_full		numeric(10,2)	default 0.0
+,	payment_4			numeric(10,2)	default 0.0
+,	payment_total		numeric(10,2)	default 0.0
 );
 
 create table customer_payment (
@@ -111,6 +118,7 @@ insert into source_info values
 ,(3, "Selebaran/Pamflet/Brosur")
 ,(4, "Media Sosial")
 ,(5, "Situs Daring");
+,(99, "Lainnya");
 
 insert into payment_type values
  (1, "Tunai")
@@ -132,20 +140,24 @@ insert into bank values
 insert into _menu
 (_profile_id ,id ,pid ,type ,label ,icon ,image ,module ,description)
 values
- (1	,900	,0		,0		,"Referensi"			,"reference"	,""						,"References"					,"")
+ (1	,100	,0		,0		,"Kostumer"				,"group"		,""						,"Customer"				,"")
+,(1	,101	,100	,3		,"Profil"				,"profile"		,"icons/profile.svg"	,"Customer_Profile"		,"")
+,(1	,900	,0		,0		,"Referensi"			,"reference"	,""						,"References"					,"")
 ,(1	,901	,900	,3		,"Perguruan Tinggi"		,"reference"	,"icons/reference.svg"	,"References_College"			,"")
 ,(1	,902	,900	,3		,"Fakultas"				,"reference"	,"icons/reference.svg"	,"References_College_Faculty"	,"")
 ,(1	,903	,900	,3		,"Jurusan"				,"reference"	,"icons/reference.svg"	,"References_College_Major"		,"")
-,(1	,904	,900	,3		,"Jenjang Pendidikan"	,"reference"	,"icons/reference.svg"	,"References_College_Degree"	,"")
-,(1	,905	,900	,3		,"Sumber Informasi"		,"reference"	,"icons/reference.svg"	,"References_SourceInfo"		,"")
-,(1	,906	,900	,3		,"Jenis Pembayaran"		,"reference"	,"icons/reference.svg"	,"References_Payment_Type"		,"")
-,(1	,907	,900	,3		,"Kelompok Pembayaran"	,"reference"	,"icons/reference.svg"	,"References_Payment_Lot"		,"")
+,(1	,904	,900	,0		,"Jenjang Pendidikan"	,"reference"	,"icons/reference.svg"	,"References_College_Degree"	,"")
+,(1	,905	,900	,0		,"Sumber Informasi"		,"reference"	,"icons/reference.svg"	,"References_SourceInfo"		,"")
+,(1	,906	,900	,0		,"Jenis Pembayaran"		,"reference"	,"icons/reference.svg"	,"References_Payment_Type"		,"")
+,(1	,907	,900	,0		,"Kelompok Pembayaran"	,"reference"	,"icons/reference.svg"	,"References_Payment_Lot"		,"")
 ,(1	,908	,900	,3		,"Bank"					,"reference"	,"icons/reference.svg"	,"References_Bank"				,"");
 
 insert into _group_menu
 (_group_id	,_menu_id	,permission)
 values
- (1			,900		,4)
+ (1			,100		,4)
+,(1			,101		,4)
+,(1			,900		,4)
 ,(1			,901		,4)
 ,(1			,902		,4)
 ,(1			,903		,4)
