@@ -38,7 +38,7 @@ create table bank (
 ,	name	varchar(128)	not null
 );
 
-create table customer (
+create table client (
 	id					bigint			primary key
 ,	_user_id			bigint			not null
 ,	ts					timestamp		not null
@@ -70,12 +70,12 @@ create table customer (
 ,	cost_total			numeric(10,2)	default 0.0
 );
 
-create table customer_payment (
+create table client_payment (
 	id					bigint			primary key
 ,	_user_id			bigint			not null
 ,	ts					timestamp		not null
 
-,	customer_id			bigint			not null
+,	client_id			bigint			not null
 ,	pay_date			date			not null
 ,	payment_lot_id		bigint			not null
 ,	payment_type_id		bigint			not null
@@ -114,7 +114,7 @@ insert into source_info values
 ,(2, "Plang")
 ,(3, "Selebaran/Pamflet/Brosur")
 ,(4, "Media Sosial")
-,(5, "Situs Daring");
+,(5, "Situs Daring")
 ,(99, "Lainnya");
 
 insert into payment_type values
@@ -137,10 +137,10 @@ insert into bank values
 insert into _menu
 (_profile_id ,id ,pid ,type ,label ,icon ,image ,module ,description)
 values
- (1	,100	,0		,0		,"Kostumer"				,"group"		,""						,"Customer"				,"")
-,(1	,101	,100	,3		,"Data"					,"profile"		,"icons/profile.svg"	,"Customer"				,"")
-,(1	,102	,100	,0		,"Profil"				,""				,""						,"Customer_Profile"		,"")
-,(1	,103	,100	,0		,"Payment"				,""				,""						,"Customer_Payment"		,"")
+ (1	,100	,0		,0		,"Klien"				,"group"		,""						,"Client"						,"")
+,(1	,101	,100	,3		,"Data"					,"profile"		,"icons/profile.svg"	,"Client"						,"")
+,(1	,102	,100	,0		,"Profil"				,""				,""						,"Client_Profile"				,"")
+,(1	,103	,100	,0		,"Payment"				,""				,""						,"Client_Payment"				,"")
 ,(1	,900	,0		,0		,"Referensi"			,"reference"	,""						,"References"					,"")
 ,(1	,901	,900	,3		,"Perguruan Tinggi"		,"reference"	,"icons/reference.svg"	,"References_College"			,"")
 ,(1	,902	,900	,3		,"Fakultas"				,"reference"	,"icons/reference.svg"	,"References_College_Faculty"	,"")

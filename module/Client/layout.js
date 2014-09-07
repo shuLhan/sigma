@@ -3,12 +3,12 @@
 	Authors:
 		- mhd.sulhan (m.shulhan@gmail.com)
 */
-//{{{ Panel: customer payment.
-function Jx_Customer_Payment ()
+//{{{ Panel: client payment.
+function Jx_Client_Payment ()
 {
 	var self = this;
 
-	this.id = "Customer_Payment";
+	this.id = "Client_Payment";
 	this.dir = Jx.generateModDir (this.id);
 	this.perm = 0;
 
@@ -32,8 +32,8 @@ function Jx_Customer_Payment ()
 				hidden		:true
 			}
 		},{
-			header		:"Customer ID"
-		,	dataIndex	:"customer_id"
+			header		:"Client ID"
+		,	dataIndex	:"client_id"
 		,	hidden		:true
 		,	editor		:
 			{
@@ -148,29 +148,29 @@ function Jx_Customer_Payment ()
 	}, this);
 
 	//{{{ f : doRefresh.
-	this.doRefresh = function (perm, cust_id)
+	this.doRefresh = function (perm, client_id)
 	{
 		this.perm = perm;
 
-		if (cust_id == 0) {
+		if (client_id == 0) {
 			self.panel.grid.clearData ();
 		} else {
-			self.panel.grid.store.proxy.extraParams.customer_id = cust_id;
+			self.panel.grid.store.proxy.extraParams.client_id = client_id;
 			self.panel.grid.doRefresh (perm);
 		}
 	};
 	//}}}
 }
 //}}}
-//{{{ Panel: Customer Profile.
-function Jx_Customer_Profile ()
+//{{{ Panel: Client Profile.
+function Jx_Client_Profile ()
 {
 	var self = this;
 
-	this.id = "Customer_Profile";
+	this.id = "Client_Profile";
 	this.dir = Jx.generateModDir (this.id);
 	this.perm = 0;
-	this.payment = new Jx_Customer_Payment ();
+	this.payment = new Jx_Client_Payment ();
 
 	//{{{ radiogroup: college or company
 	this.college_or_company = Ext.create ("Ext.form.RadioGroup",
@@ -193,7 +193,7 @@ function Jx_Customer_Profile ()
 	//{{{ fieldset: profile.
 	this.fs_profile =
 		{
-			header		:"Kostumer Profil"
+			header		:"Klien Profil"
 		,	fsConfig	:
 			{
 				padding		:10
@@ -573,27 +573,27 @@ function Jx_Customer_Profile ()
 }
 //}}}
 //{{{ Main
-function Jx_Customer ()
+function Jx_Client ()
 {
 	var self = this;
 
-	this.id = "Customer";
+	this.id = "Client";
 	this.dir = Jx.generateModDir (this.id);
 	this.perm = 0;
-	this.cust_profile = new Jx_Customer_Profile ();
-	this.cust_payment = new Jx_Customer_Payment ();
+	this.client_profile = new Jx_Client_Profile ();
+	this.client_payment = new Jx_Client_Payment ();
 
 	this.panel = Ext.create ("Ext.panel.Panel",
 	{
-		itemId		:"Customer"
-	,	title		:"Kostumer"
+		itemId		:"Client"
+	,	title		:"Klien"
 	,	titleAlign	:"center"
 	,	closable	:true
 	,	layout		:"border"
 	,	items		:
 		[
-			this.cust_profile.panel
-		,	this.cust_payment.panel
+			this.client_profile.panel
+		,	this.client_payment.panel
 		]
 	});
 
@@ -613,24 +613,24 @@ function Jx_Customer ()
 			]
 		,	function ()
 			{
-				self.cust_profile.doRefresh (perm);
-				self.cust_payment.doRefresh (perm, 0);
+				self.client_profile.doRefresh (perm);
+				self.client_payment.doRefresh (perm, 0);
 			}
 		,	0);
 	}
 
-	this.cust_profile.panel.grid.afterSelectionChange = function (model, data)
+	this.client_profile.panel.grid.afterSelectionChange = function (model, data)
 	{
 		if (data.length <= 0) {
 			return;
 		}
-		self.cust_payment.doRefresh (self.perm, data[0].get ("id"));
-		self.cust_profile.compute_total ();
+		self.client_payment.doRefresh (self.perm, data[0].get ("id"));
+		self.client_profile.compute_total ();
 	}
 }
 //}}}
 //}}}
 
-var Customer = new Jx_Customer ();
+var Client = new Jx_Client ();
 
-//# sourceURL=module/Customer/layout.js
+//# sourceURL=module/Client/layout.js

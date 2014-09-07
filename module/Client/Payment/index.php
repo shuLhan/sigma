@@ -11,7 +11,7 @@ $fields	= [
 ,	"_user_id"
 ,	"ts"
 
-,	"customer_id"
+,	"client_id"
 ,	"pay_date"
 ,	"payment_lot_id"
 ,	"payment_type_id"
@@ -23,7 +23,7 @@ $fields	= [
 ,	"total"
 ];
 
-Jaring::$_mod["db_table"]["name"]		= "customer_payment";
+Jaring::$_mod["db_table"]["name"]		= "client_payment";
 Jaring::$_mod["db_table"]["read"]		= $fields;
 Jaring::$_mod["db_table"]["search"]		= ["receipt_code"];
 Jaring::$_mod["db_table"]["order"]		= ["pay_date DESC"];

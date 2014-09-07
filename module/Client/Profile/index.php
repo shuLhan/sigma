@@ -41,7 +41,7 @@ $fields	= [
 ,	"cost_total"
 ];
 
-Jaring::$_mod["db_table"]["name"]		= "customer";
+Jaring::$_mod["db_table"]["name"]		= "client";
 Jaring::$_mod["db_table"]["read"]		= $fields;
 Jaring::$_mod["db_table"]["search"]		= ["name", "phone", "address"];
 Jaring::$_mod["db_table"]["order"]		= ["name"];
