@@ -65,6 +65,8 @@ create table customer (
 ,	cost_add_value1		numeric(10,2)	default 0.0
 ,	cost_add_value2		numeric(10,2)	default 0.0
 ,	cost_add_value3		numeric(10,2)	default 0.0
+,	cost_gross			numeric(10,2)	default 0.0
+,	cost_tax			numeric(10,2)	default 0.0
 ,	cost_total			numeric(10,2)	default 0.0
 );
 

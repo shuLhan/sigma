@@ -36,9 +36,9 @@ $fields	= [
 ,	"cost_add_value_1"
 ,	"cost_add_value_2"
 ,	"cost_add_value_3"
+,	"cost_gross"
+,	"cost_tax"
 ,	"cost_total"
-
-,	"payment_total"
 ];
 
 Jaring::$_mod["db_table"]["name"]		= "customer";

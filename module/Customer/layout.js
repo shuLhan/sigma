@@ -172,6 +172,24 @@ function Jx_Customer_Profile ()
 	this.perm = 0;
 	this.payment = new Jx_Customer_Payment ();
 
+	//{{{ radiogroup: college or company
+	this.college_or_company = Ext.create ("Ext.form.RadioGroup",
+		{
+			xtype	:"radiogroup"
+		,	columns	:1
+		,	items	:
+			[{
+				boxLabel	:"Perguruan Tinggi"
+			,	name		:"college_or_company"
+			,	inputValue	:1
+			,	checked		:true
+			},{
+				boxLabel	:"Perusahaan"
+			,	name		:"college_or_company"
+			,	inputValue	:2
+			}]
+		});
+	//}}}
 	//{{{ fieldset: profile.
 	this.fs_profile =
 		{
@@ -221,24 +239,6 @@ function Jx_Customer_Profile ()
 			}]
 		};
 
-	//}}}
-	//{{{ radiogroup: college or company
-	this.college_or_company = Ext.create ("Ext.form.RadioGroup",
-		{
-			xtype	:"radiogroup"
-		,	columns	:1
-		,	items	:
-			[{
-				boxLabel	:"Perguruan Tinggi"
-			,	name		:"college_or_company"
-			,	inputValue	:1
-			,	checked		:true
-			},{
-				boxLabel	:"Perusahaan"
-			,	name		:"college_or_company"
-			,	inputValue	:2
-			}]
-		});
 	//}}}
 	//{{{ fieldset: college.
 	this.fs_college =
@@ -420,6 +420,7 @@ function Jx_Customer_Profile ()
 		,	editor		:
 			{
 				xtype		:"numberfield"
+			,	itemId		:"cost_add_value_1"
 			}
 		},{
 			header		:"Biaya Lain #2"
@@ -433,6 +434,7 @@ function Jx_Customer_Profile ()
 		,	editor		:
 			{
 				xtype		:"numberfield"
+			,	itemId		:"cost_add_value_2"
 			}
 		},{
 			header		:"Biaya Lain #3"
@@ -446,46 +448,34 @@ function Jx_Customer_Profile ()
 		,	editor		:
 			{
 				xtype		:"numberfield"
+			,	itemId		:"cost_add_value_3"
 			}
 		},{
 			header		:"Total"
+		,	dataIndex	:"cost_gross"
+		,	hidden		:true
+		,	editor		:
+			{
+				xtype		:"displayfield"
+			,	itemId		:"cost_gross"
+			}
+		},{
+			header		:"Pajak 10%"
+		,	dataIndex	:"cost_tax"
+		,	hidden		:true
+		,	editor		:
+			{
+				xtype		:"displayfield"
+			,	itemId		:"cost_tax"
+			}
+		},{
+			header		:"Total dengan Pajak"
 		,	dataIndex	:"cost_total"
 		,	editor		:
 			{
 				xtype		:"displayfield"
+			,	itemId		:"cost_total"
 			}
-		}]
-	};
-	//}}}
-	//{{{ fieldset: payment.
-	this.fs_payment =
-	{
-		header		:"Pembayaran"
-	,	fsConfig	:
-		{
-			padding		:10
-		,	hidden		:true
-		}
-	,	columns		:
-		[{
-			header		:"DP 1"
-		,	dataIndex	:"payment_1"
-		,	hidden		:true
-		},{
-			header		:"DP 2"
-		,	dataIndex	:"payment_2"
-		,	hidden		:true
-		},{
-			header		:"DP 3"
-		,	dataIndex	:"payment_3"
-		,	hidden		:true
-		},{
-			header		:"Pelunasan"
-		,	dataIndex	:"payment_4"
-		,	hidden		:true
-		},{
-			header		:"Total"
-		,	dataIndex	:"payment_total"
 		}]
 	};
 	//}}}
@@ -518,13 +508,18 @@ function Jx_Customer_Profile ()
 		,	this.fs_college
 		,	this.fs_sourceinfo
 		,	this.fs_cost
-		,	this.fs_payment
 		]
 	});
 	//}}}
 	//{{{ components.
 	this._fs_sourceinfo = this.panel.form.down ("#source_info_id");
 	this._ta_source_others = this.panel.form.down ("#source_info_others");
+	this.cost1 = this.panel.form.down ("#cost_add_value_1");
+	this.cost2 = this.panel.form.down ("#cost_add_value_2");
+	this.cost3 = this.panel.form.down ("#cost_add_value_3");
+	this.cost_gross = this.panel.form.down ("#cost_gross");
+	this.tax = this.panel.form.down ("#cost_tax");
+	this.cost_total = this.panel.form.down ("#cost_total");
 	//}}}
 	//{{{ radiogroup college_or_company on change.
 	this.college_or_company.on ("change", function (cmp, newv, oldv)
@@ -551,6 +546,23 @@ function Jx_Customer_Profile ()
 		}
 	});
 	//}}}
+	this.compute_total = function ()
+	{
+		var c1 = this.cost1.getValue ();
+		var c2 = this.cost2.getValue ();
+		var c3 = this.cost3.getValue ();
+
+		var gross = c1 + c2 + c3;
+		var taxed = Math.round ((0.1 * gross) * 100)/ 100
+
+		this.cost_gross.setValue (gross);
+		this.tax.setValue (taxed);
+		this.cost_total.setValue (gross + taxed);
+	}
+
+	this.cost1.on ("change", this.compute_total, this);
+	this.cost2.on ("change", this.compute_total, this);
+	this.cost3.on ("change", this.compute_total, this);
 	//{{{ f : doRefresh.
 	this.doRefresh = function (perm)
 	{
@@ -613,6 +625,7 @@ function Jx_Customer ()
 			return;
 		}
 		self.cust_payment.doRefresh (self.perm, data[0].get ("id"));
+		self.cust_profile.compute_total ();
 	}
 }
 //}}}
