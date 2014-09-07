@@ -7,3 +7,4 @@ Authors:
 /*
 	Application style.
 */
+.payment			{ background: 0px 0px/16px 16px url("/images/app/payment.svg") no-repeat !important; }
