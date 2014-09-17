@@ -87,6 +87,40 @@ create table client_payment (
 ,	total				numeric(10,2)	default 0.0
 );
 
+create table analysis_price (
+	id				bigint			primary key
+,	pid				bigint			default 0
+,	name			varchar(128)	not null
+,	base			numeric(10,2)	default 0.0
+,	var_independent	numeric(10,2)	default 0.0
+,	var_dependent	numeric(10,2)	default 0.0
+,	var_intervening	numeric(10,2)	default 0.0
+,	var_mediation	numeric(10,2)	default 0.0
+,	var_moderation	numeric(10,2)	default 0.0
+,	channel			numeric(10,2)	default 0.0
+,	phase			numeric(10,2)	default 0.0
+,	segmentation	numeric(10,2)	default 0.0
+,	attribute		numeric(10,2)	default 0.0
+,	hierarchy		numeric(10,2)	default 0.0
+);
+
+create table client_analysis (
+	id				bigint			primary_key
+,	client_id		bigint			not null
+,	analysis_id		bigint			not null
+
+,	var_independent	int				default 0
+,	var_dependent	int				default 0
+,	var_intervening	int				default 0
+,	var_mediation	int				default 0
+,	var_moderation	int				default 0
+,	channel			int				default 0
+,	phase			int				default 0
+,	segmentation	int				default 0
+,	attributes		int				default 0
+,	hierarchy		int				default 0
+);
+
 insert into college values 
  (1, "ITB")
 ,(2, "UNPAD")
@@ -148,7 +182,10 @@ values
 ,(1	,905	,900	,0		,"Sumber Informasi"		,"reference"	,"icons/reference.svg"	,"References_SourceInfo"		,"")
 ,(1	,906	,900	,0		,"Jenis Pembayaran"		,"reference"	,"icons/reference.svg"	,"References_Payment_Type"		,"")
 ,(1	,907	,900	,0		,"Kelompok Pembayaran"	,"reference"	,"icons/reference.svg"	,"References_Payment_Lot"		,"")
-,(1	,908	,900	,3		,"Bank"					,"reference"	,"icons/reference.svg"	,"References_Bank"				,"");
+,(1	,908	,900	,3		,"Bank"					,"reference"	,"icons/reference.svg"	,"References_Bank"				,"")
+,(1	,909	,900	,3		,"Biaya Analisis"		,"reference"	,"icons/reference.svg"	,"References_Analysis_Price"	,"")
+,(1	,910	,900	,0		,"Analisis"				,"reference"	,"icons/reference.svg"	,"References_Analysis"			,"");
+
 
 insert into _group_menu
 (_group_id	,_menu_id	,permission)
@@ -164,4 +201,6 @@ values
 ,(1			,905		,4)
 ,(1			,906		,4)
 ,(1			,907		,4)
-,(1			,908		,4);
+,(1			,908		,4)
+,(1			,909		,4)
+,(1			,910		,4);
