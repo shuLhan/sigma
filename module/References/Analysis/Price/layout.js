@@ -37,110 +37,94 @@ function Jx_References_Analysis_Price_Grid ()
 		,	rootVisible		:false
 		,	showSearchField	:false
 		,	store			:this.store
+		,	selType			:"cellmodel"
 		,	plugins			:
 			[
 				Ext.create ("Ext.grid.plugin.CellEditing", {
 					clicksToEdit:2
+				,	listeners	:
+					{
+						beforeedit: function (ed, e)
+						{
+							if (e.record.get ("leaf")) {
+								return true;
+							}
+							return false;
+						}
+					}
 				})
 			,	Ext.create ("Jx.plugin.CrudButtons")
 			]
 		,	columns			:
-			[{
-				header			:"ID"
-			,	dataIndex		:"id"
-			,	hidden			:true
-			},{
-				header			:"PID"
-			,	dataIndex		:"pid"
-			,	hidden			:true
-			},{
-				xtype			:"treecolumn"
-			,	header			:"Nama"
-			,	dataIndex		:"name"
-			,	flex			:1
-			},{
-				header			:"Biaya Pokok"
-			,	dataIndex		:"base"
-			,	editor			:
+			{
+				defaults	:
 				{
-					xtype			:"numberfield"
+					renderer		:function (v, md, r, ridx, cidx, str, view)
+					{
+						if (r.get ("leaf")) {
+							return v;
+						}
+						return;
+					}
+				,	editor	:
+					{
+						xtype	:"numberfield"
+					}
 				}
-			},{
-				header			:"Biaya Variabel"
-			,	columns			:
+
+			,	items	:
 				[{
+					header			:"ID"
+				,	dataIndex		:"id"
+				,	hidden			:true
+				,	editor			:false
+				},{
+					header			:"PID"
+				,	dataIndex		:"pid"
+				,	hidden			:true
+				,	editor			:false
+				},{
+					xtype			:"treecolumn"
+				,	header			:"Nama"
+				,	dataIndex		:"name"
+				,	flex			:1
+				,	renderer		:false
+				,	editor			:false
+				},{
+					header			:"Biaya Pokok"
+				,	dataIndex		:"base"
+				},{
 					header			:"Independen"
 				,	dataIndex		:"var_independent"
-				,	editor			:
-					{
-						xtype			:"numberfield"
-					}
 				},{
 					header			:"Dependen"
 				,	dataIndex		:"var_dependent"
-				,	editor			:
-					{
-						xtype			:"numberfield"
-					}
 				},{
 					header			:"Intervening"
 				,	dataIndex		:"var_intervening"
-				,	editor			:
-					{
-						xtype			:"numberfield"
-					}
 				},{
 					header			:"Mediasi"
 				,	dataIndex		:"var_mediation"
-				,	editor			:
-					{
-						xtype			:"numberfield"
-					}
 				},{
 					header			:"Moderasi"
 				,	dataIndex		:"var_moderation"
-				,	editor			:
-					{
-						xtype			:"numberfield"
-					}
-
+				},{
+					header		:"Channel"
+				,	dataIndex	:"channel"
+				},{
+					header		:"Tahap/Fase"
+				,	dataIndex	:"phase"
+				},{
+					header		:"Segmentasi"
+				,	dataIndex	:"segmentation"
+				},{
+					header		:"Level Atribut"
+				,	dataIndex	:"attribute"
+				},{
+					header		:"Hierarki"
+				,	dataIndex	:"hierarchy"
 				}]
-			},{
-				header		:"Channel"
-			,	dataIndex	:"channel"
-			,	editor		:
-				{
-					xtype		:"numberfield"
-				}
-			},{
-				header		:"Tahap/Fase"
-			,	dataIndex	:"phase"
-			,	editor		:
-				{
-					xtype		:"numberfield"
-				}
-			},{
-				header		:"Segmentasi"
-			,	dataIndex	:"segmentation"
-			,	editor		:
-				{
-					xtype		:"numberfield"
-				}
-			},{
-				header		:"Level Atribut"
-			,	dataIndex	:"attribute"
-			,	editor		:
-				{
-					xtype		:"numberfield"
-				}
-			},{
-				header		:"Hierarki"
-			,	dataIndex	:"hierarchy"
-			,	editor		:
-				{
-					xtype		:"numberfield"
-				}
-			}]
+			}
 		});
 
 	this.doRefresh = function (perm)
