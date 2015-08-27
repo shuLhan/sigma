@@ -117,7 +117,7 @@ create table client_analysis (
 ,	channel			int				default 0
 ,	phase			int				default 0
 ,	segmentation	int				default 0
-,	attributes		int				default 0
+,	attribute		int				default 0
 ,	hierarchy		int				default 0
 );
 
